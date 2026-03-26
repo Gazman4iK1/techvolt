@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Кошик — TechVolt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a href="../index.html" class="logo">Tech<span>Volt</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html">Головна</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="about.html">Про нас</a></li>
+        <li><a href="contact.html">Контакти</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn-icon cart-btn active" aria-label="Кошик">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+      </div>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Кошик</h1>
+      <p>Перегляньте та підтвердіть ваше замовлення</p>
+    </div>
+  </section>
+
+  <div class="container cart-layout" id="cartLayout">
+    <!-- Rendered by JS -->
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom"><p>© 2025 TechVolt. Всі права захищені.</p></div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    function renderCart() {
+      const cart = getCart();
+      const layout = document.getElementById('cartLayout');
+
+      if (!cart.length) {
+        layout.innerHTML = `
+          <div class="empty-cart" style="grid-column:1/-1">
+            <div class="empty-cart__icon">🛒</div>
+            <h2>Кошик порожній</h2>
+            <p>Додайте товари з нашого каталогу</p>
+            <a href="catalog.html" class="btn-primary">Перейти до каталогу</a>
+          </div>`;
+        return;
+      }
+
+      let subtotal = 0;
+      const items = cart.map(item => {
+        const p = PRODUCTS.find(pr => pr.id === item.id);
+        if (!p) return '';
+        subtotal += p.price * item.qty;
+        return `
+          <div class="cart-item" id="cartItem-${p.id}">
+            <div class="cart-item__img">${p.icon}</div>
+            <div>
+              <div class="cart-item__name">${p.name}</div>
+              <div class="cart-item__cat">${p.catLabel}</div>
+              <div class="cart-item__qty">
+                <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+                <span id="qty-${p.id}">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px">
+              <div class="cart-item__price">${formatPrice(p.price * item.qty)}</div>
+              <button class="cart-item__remove" onclick="removeItem(${p.id})" title="Видалити">✕</button>
+            </div>
+          </div>`;
+      }).join('');
+
+      const delivery = subtotal >= 2000 ? 0 : 99;
+      const total = subtotal + delivery;
+
+      layout.innerHTML = `
+        <div class="cart-items">${items}</div>
+        <div class="cart-summary">
+          <div class="summary-card">
+            <h3>Ваше замовлення</h3>
+            <div class="summary-row"><span>Товари (${cart.reduce((s,i)=>s+i.qty,0)} шт.)</span><span>${formatPrice(subtotal)}</span></div>
+            <div class="summary-row"><span>Доставка</span><span>${delivery === 0 ? '<span style="color:var(--accent)">Безкоштовно</span>' : formatPrice(delivery)}</span></div>
+            <div class="summary-row total"><span>Разом</span><span>${formatPrice(total)}</span></div>
+            <button class="btn-primary form-submit" onclick="checkout()">Оформити замовлення</button>
+            <a href="catalog.html" style="display:block;text-align:center;margin-top:12px;color:var(--text-muted);font-size:0.88rem">← Продовжити покупки</a>
+          </div>
+        </div>`;
+    }
+
+    function changeQty(id, delta) {
+      const cart = getCart();
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty = Math.max(1, item.qty + delta);
+      saveCart(cart);
+      renderCart();
+    }
+
+    function removeItem(id) {
+      const cart = getCart().filter(i => i.id !== id);
+      saveCart(cart);
+      renderCart();
+      showToast('🗑️ Товар видалено з кошика');
+    }
+
+    function checkout() {
+      showToast('✅ Замовлення оформлено! Дякуємо!');
+      saveCart([]);
+      setTimeout(() => renderCart(), 1500);
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>

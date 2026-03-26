@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Про нас — TechVolt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a href="../index.html" class="logo">Tech<span>Volt</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html">Головна</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="about.html" class="active">Про нас</a></li>
+        <li><a href="contact.html">Контакти</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn-icon cart-btn" aria-label="Кошик">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+      </div>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Про TechVolt</h1>
+      <p>Ваш надійний партнер у світі сучасних технологій з 2020 року</p>
+    </div>
+  </section>
+
+  <section class="about-story">
+    <div class="container">
+      <div class="about-story__grid">
+        <div class="about-visual">⚡</div>
+        <div class="about-text">
+          <h2>Ми робимо технологій доступними</h2>
+          <p>TechVolt — це сучасний інтернет-магазин електроніки, що об'єднує найкращі бренди світу та українських покупців. Ми розпочали роботу у 2020 році з невеликого складу і невпинно зростаємо.</p>
+          <p>Наша місія — надати кожному українцю доступ до найновішої техніки за чесними цінами, з якісним сервісом та справжньою гарантією.</p>
+          <p>Сьогодні в нашому каталозі понад 5 000 товарів від 200+ брендів. Ми офіційні дистриб'ютори Apple, Samsung, Sony та ще 50 провідних компаній.</p>
+          <a href="catalog.html" class="btn-primary" style="margin-top:8px">Переглянути каталог</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 0 0 80px">
+    <div class="container">
+      <div class="about-numbers">
+        <div class="about-number"><strong>5 000+</strong><span>Товарів у каталозі</span></div>
+        <div class="about-number"><strong>120 000+</strong><span>Задоволених клієнтів</span></div>
+        <div class="about-number"><strong>200+</strong><span>Партнерських брендів</span></div>
+        <div class="about-number"><strong>5 років</strong><span>На ринку України</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team">
+    <div class="container">
+      <h2>Наша команда</h2>
+      <div class="team__grid">
+        <div class="team-card">
+          <div class="team-card__avatar">👨‍💼</div>
+          <h3>Олексій Коваль</h3>
+          <div class="team-card__role">CEO & Засновник</div>
+          <p>Понад 10 років досвіду в e-commerce та IT-дистрибуції. Захоплюється новітніми технологіями.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-card__avatar">👩‍💻</div>
+          <h3>Марія Шевченко</h3>
+          <div class="team-card__role">CTO</div>
+          <p>Відповідає за розвиток платформи та технічну інфраструктуру магазину.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-card__avatar">👨‍🎨</div>
+          <h3>Дмитро Лисенко</h3>
+          <div class="team-card__role">Head of Design</div>
+          <p>Створює зручний та красивий досвід для покупців. Фанат мінімалізму та типографіки.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="../index.html" class="logo">Tech<span>Volt</span></a>
+          <p>Ваш надійний магазин електроніки.</p>
+        </div>
+        <div class="footer__col"><h4>Каталог</h4><ul><li><a href="catalog.html?cat=phones">Смартфони</a></li><li><a href="catalog.html?cat=laptops">Ноутбуки</a></li></ul></div>
+        <div class="footer__col"><h4>Компанія</h4><ul><li><a href="about.html">Про нас</a></li><li><a href="contact.html">Контакти</a></li></ul></div>
+        <div class="footer__col"><h4>Підтримка</h4><ul><li><a href="#">Доставка</a></li><li><a href="#">Гарантія</a></li></ul></div>
+      </div>
+      <div class="footer__bottom"><p>© 2025 TechVolt. Всі права захищені.</p></div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
